@@ -2,7 +2,7 @@ export interface DiscoveredGateway {
     name: string;
     host?: string;
     version: string;
-    addresses: string[];
+    addresses?: string[];
 }
 /**
  * Auto-discover a tradfri gateway on the network.

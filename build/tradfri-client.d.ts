@@ -11,8 +11,8 @@ import { OperationProvider } from "./lib/operation-provider";
 import { PlugOperation } from "./lib/plug";
 import { ConnectionWatcherOptions } from "./lib/watcher";
 import { AirPurifierOperation } from "./lib/airPurifier";
-export declare type ObserveResourceCallback = (resp: CoapResponse) => void;
-export declare type ObserveDevicesCallback = (addedDevices: Accessory[], removedDevices: Accessory[]) => void;
+export type ObserveResourceCallback = (resp: CoapResponse) => void;
+export type ObserveDevicesCallback = (addedDevices: Accessory[], removedDevices: Accessory[]) => void;
 export interface TradfriClient {
     on<TEvent extends AllEvents>(event: TEvent, callback: AllEventCallbacks[TEvent]): this;
     removeListener<TEvent extends AllEvents>(event: TEvent, callback: AllEventCallbacks[TEvent]): this;

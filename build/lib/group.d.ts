@@ -42,4 +42,4 @@ export declare class Group extends IPSODevice {
      */
     stopBlinds(): Promise<boolean>;
 }
-export declare type GroupOperation = Partial<Pick<Group, "onOff" | "dimmer" | "position" | "trigger" | "sceneId" | "transitionTime">>;
+export type GroupOperation = Partial<Pick<Group, "onOff" | "dimmer" | "position" | "trigger" | "sceneId" | "transitionTime">>;

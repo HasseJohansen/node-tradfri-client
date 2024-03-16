@@ -10,7 +10,7 @@ export declare enum FanMode {
     Level4 = 40,
     Level5 = 50
 }
-export declare type AirPurifierOperation = Partial<Pick<AirPurifier, "controlsLocked" | "fanMode" | "fanSpeed" | "statusLEDs">>;
+export type AirPurifierOperation = Partial<Pick<AirPurifier, "controlsLocked" | "fanMode" | "fanSpeed" | "statusLEDs">>;
 export declare class AirPurifier extends IPSODevice {
     constructor(options?: IPSOOptions, accessory?: Accessory);
     private _modelName;

@@ -1,12 +1,12 @@
 import { OperationProvider } from "./operation-provider";
-export declare type PropertyTransformKernel = (value: any, parent?: IPSOObject) => any;
+export type PropertyTransformKernel = (value: any, parent?: IPSOObject) => any;
 export interface PropertyTransform extends PropertyTransformKernel {
     /** If this transform is not supposed to be skipped ever */
     neverSkip: boolean;
     /** If this transform requires arrays to be split */
     splitArrays: boolean;
 }
-export declare type RequiredPredicate = (me: IPSOObject, reference?: IPSOObject) => boolean;
+export type RequiredPredicate = (me: IPSOObject, reference?: IPSOObject) => boolean;
 /**
  * Defines the ipso key neccessary to serialize a property to a CoAP object
  */

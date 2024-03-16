@@ -1,7 +1,7 @@
 import { Accessory } from "./accessory";
 import { IPSODevice } from "./ipsoDevice";
 import { IPSOOptions } from "./ipsoObject";
-export declare type PlugOperation = Partial<Pick<Plug, "onOff" | "dimmer">>;
+export type PlugOperation = Partial<Pick<Plug, "onOff" | "dimmer">>;
 export declare class Plug extends IPSODevice {
     constructor(options?: IPSOOptions, accessory?: Accessory);
     private _modelName;

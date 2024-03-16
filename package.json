@@ -1,6 +1,6 @@
 {
   "name": "node-tradfri-client",
-  "version": "3.2.0",
+  "version": "4.0.0",
   "description": "Library to talk to IKEA Trådfri Gateways without external binaries",
   "keywords": [
     "coap",
@@ -14,8 +14,8 @@
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "author": {
-    "name": "AlCalzone",
-    "email": "d.griesel@gmx.net"
+    "name": "HasseJohansen",
+    "email": "hasse-github@hagenjohansen.dk"
   },
   "contributors": [
     "neophob (https://github.com/neophob)",
@@ -23,13 +23,13 @@
     "jareware (https://github.com/jareware)"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/AlCalzone/node-tradfri-client",
+  "homepage": "https://github.com/HasseJohansen/node-tradfri-client",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AlCalzone/node-tradfri-client.git"
+    "url": "git+https://github.com/HasseJohansen/node-tradfri-client.git"
   },
   "bugs": {
-    "url": "https://github.com/AlCalzone/node-tradfri-client/issues"
+    "url": "https://github.com/HasseJohansen/node-tradfri-client/issues"
   },
   "engines": {
     "node": ">=12"
@@ -66,7 +66,7 @@
   "dependencies": {
     "alcalzone-shared": "^4.0.8",
     "debug": "^4.3.4",
-    "mdns-server": "^1.0.11",
+    "bonjour-service": "^1.2.1",
     "node-coap-client": "^2.1.0",
     "reflect-metadata": "^0.1.13"
   },

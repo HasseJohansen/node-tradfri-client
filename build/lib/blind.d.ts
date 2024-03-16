@@ -1,7 +1,7 @@
 import { Accessory } from "./accessory";
 import { IPSODevice } from "./ipsoDevice";
 import { IPSOOptions } from "./ipsoObject";
-export declare type BlindOperation = Partial<Pick<Blind, "position" | "trigger">>;
+export type BlindOperation = Partial<Pick<Blind, "position" | "trigger">>;
 export declare class Blind extends IPSODevice {
     constructor(options?: IPSOOptions, accessory?: Accessory);
     private _modelName;

@@ -27,7 +27,7 @@ export declare class FirmwareUpdateNotification extends IPSOObject {
         priority: string;
     };
 }
-export declare type NotificationDetails = RebootNotification | FirmwareUpdateNotification | Record<string, string>;
+export type NotificationDetails = RebootNotification | FirmwareUpdateNotification | Record<string, string>;
 export declare enum NotificationTypes {
     NewFirmwareAvailable = 1001,
     Reboot = 1003,

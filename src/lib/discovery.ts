@@ -1,24 +1,10 @@
-import * as createMDNSServer from "mdns-server";
+import Bonjour from "bonjour-service";
 
 export interface DiscoveredGateway {
 	name: string;
 	host?: string;
 	version: string;
-	addresses: string[];
-}
-
-function parseTXTRecord(data: Buffer) {
-	const ret: Record<string, string> = {};
-	let offset = 0;
-	while (offset < data.length) {
-		const length = data[offset];
-		const label = data.slice(offset + 1, offset + 1 + length).toString("ascii");
-		const [key, value] = label.split("=");
-		ret[key] = value;
-
-		offset += length;
-	}
-	return ret;
+	addresses?: string[];
 }
 
 /**
@@ -27,64 +13,25 @@ function parseTXTRecord(data: Buffer) {
  * Pass false or a negative number to explicitly wait forever.
  */
 export function discoverGateway(timeout: number | false = 10000): Promise<DiscoveredGateway | null> {
-	const mdns = createMDNSServer({
-		reuseAddr: true,
-		loopback: false,
-		noInit: true,
-	});
+	const bonjour = new Bonjour()
 	let timer: NodeJS.Timer;
 
-	const domain = "_coap._udp.local";
+	return new Promise((resolve) => {
 
-	return new Promise((resolve, reject) => {
-
-		mdns.on("response", (resp) => {
-
-			const allAnswers = [...resp.answers, ...resp.additionals];
-			const discard = allAnswers.find(a => a.name === domain) == null;
-			if (discard) return;
-
-			// ensure all record types were received
-			const ptrRecord = allAnswers.find(a => a.type === "PTR");
-			if (!ptrRecord) return;
-			const srvRecord = allAnswers.find(a => a.type === "SRV");
-			if (!srvRecord) return;
-			const txtRecord = allAnswers.find(a => a.type === "TXT");
-			if (!txtRecord) return;
-			const aRecords = allAnswers.filter(a => a.type === "A" || a.type === "AAAA");
-			if (aRecords.length === 0) return;
-
-			// extract the data
-			const match = /^gw\-[0-9a-f]{12}/.exec(ptrRecord.data);
-			const name: string = !!match ? match[0] : "unknown";
-			const host: string = srvRecord.data.target;
-			const { version } = parseTXTRecord(txtRecord.data);
-			const addresses = aRecords.map(a => a.data);
-
+                bonjour.find({ type: 'coap', protocol: 'udp' }, function (service) {
+			console.log('Found a COAP endpoint:', service)
+		        // extract the data
+		        const name = service.name;
+			const host = service.host;
+			const version = service.txt.version;
+			const addresses = service.addresses;
 			clearTimeout(timer);
-			mdns.destroy();
 			resolve({
 				name, host, version, addresses,
 			});
 		});
-
-		mdns.on("ready", () => {
-			mdns.query([
-				{ name: domain, type: "A" },
-				{ name: domain, type: "AAAA" },
-				{ name: domain, type: "PTR" },
-				{ name: domain, type: "SRV" },
-				{ name: domain, type: "TXT" },
-			]);
-		});
-
-		mdns.on("error", reject);
-
-		mdns.initServer();
-
-		if (typeof timeout === "number" && timeout > 0) {
+	        if (typeof timeout === "number" && timeout > 0) {
 			timer = setTimeout(() => {
-				mdns.destroy();
 				resolve(null);
 			}, timeout);
 		}
