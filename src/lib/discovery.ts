@@ -1,4 +1,4 @@
-import Bonjour from "bonjour-service";
+import { default as Bonjour } from "bonjour-service";
 
 export interface DiscoveredGateway {
 	name: string;
