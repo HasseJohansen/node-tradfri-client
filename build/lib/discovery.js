@@ -8,7 +8,7 @@ const bonjour_service_1 = require("bonjour-service");
  * Pass false or a negative number to explicitly wait forever.
  */
 function discoverGateway(timeout = 10000) {
-    const bonjour = new bonjour_service_1.default();
+    const bonjour = new bonjour_service_1.Bonjour();
     let timer;
     return new Promise((resolve) => {
         bonjour.find({ type: 'coap', protocol: 'udp' }, function (service) {
